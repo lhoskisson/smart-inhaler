@@ -98,10 +98,10 @@ public class WearableData {
 
     public boolean isPm_countValid(){return pm_count != DataFinals.DEFAULT_INTEGER;}
 
-    public boolean isVoc_dataValid(){ return voc_data != DataFinals.DEFAULT_CHAR; }
+    public boolean isVoc_dataValid(){ return voc_data != DataFinals.DEFAULT_INTEGER; }
 
     public boolean isCo2_dataValid(){
-        return co2_data != DataFinals.DEFAULT_CHAR;
+        return co2_data != DataFinals.DEFAULT_INTEGER;
     }
 
     @NonNull
