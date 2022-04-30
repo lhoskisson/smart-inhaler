@@ -6,7 +6,7 @@
     "entities": [
       {
         "tableName": "InhalerUsageEvent_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Inhaler_Usage_Event_UTC_ISO_8601_date_time` TEXT NOT NULL, `tag` INTEGER, `message` TEXT, `Wearable_Data_UTC_ISO_8601_date_time` TEXT, `temperature` REAL, `humidity` REAL, `pm_count` INTEGER, `character` INTEGER, `digit` INTEGER, `weatherTemperature` REAL, `weatherHumidity` REAL, `weatherPrecipitationIntensity` REAL, `weatherTreeIndex` INTEGER, `weatherGrassIndex` INTEGER, `weatherEPAIndex` INTEGER, PRIMARY KEY(`Inhaler_Usage_Event_UTC_ISO_8601_date_time`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Inhaler_Usage_Event_UTC_ISO_8601_date_time` TEXT NOT NULL, `tag` INTEGER, `message` TEXT, `Wearable_Data_UTC_ISO_8601_date_time` TEXT, `temperature` REAL, `humidity` REAL, `pm_count` INTEGER, `voc_data` INTEGER, `co2_data` INTEGER, `weatherTemperature` REAL, `weatherHumidity` REAL, `weatherPrecipitationIntensity` REAL, `weatherTreeIndex` INTEGER, `weatherGrassIndex` INTEGER, `weatherEPAIndex` INTEGER, PRIMARY KEY(`Inhaler_Usage_Event_UTC_ISO_8601_date_time`))",
         "fields": [
           {
             "fieldPath": "inhalerUsageEventTimeStamp",
@@ -51,14 +51,14 @@
             "notNull": false
           },
           {
-            "fieldPath": "wearableData.character",
-            "columnName": "character",
+            "fieldPath": "wearableData.voc_data",
+            "columnName": "voc_data",
             "affinity": "INTEGER",
             "notNull": false
           },
           {
-            "fieldPath": "wearableData.digit",
-            "columnName": "digit",
+            "fieldPath": "wearableData.co2_data",
+            "columnName": "co2_data",
             "affinity": "INTEGER",
             "notNull": false
           },
@@ -110,7 +110,7 @@
       },
       {
         "tableName": "WearableData_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Wearable_Data_UTC_ISO_8601_date_time` TEXT NOT NULL, `temperature` REAL NOT NULL, `humidity` REAL NOT NULL, `pm_count` INTEGER NOT NULL, `character` INTEGER NOT NULL, `digit` INTEGER NOT NULL, PRIMARY KEY(`Wearable_Data_UTC_ISO_8601_date_time`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Wearable_Data_UTC_ISO_8601_date_time` TEXT NOT NULL, `temperature` REAL NOT NULL, `humidity` REAL NOT NULL, `pm_count` INTEGER NOT NULL, `voc_data` INTEGER NOT NULL, `co2_data` INTEGER NOT NULL, PRIMARY KEY(`Wearable_Data_UTC_ISO_8601_date_time`))",
         "fields": [
           {
             "fieldPath": "wearableDataTimeStamp",
@@ -137,14 +137,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "character",
-            "columnName": "character",
+            "fieldPath": "voc_data",
+            "columnName": "voc_data",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "digit",
-            "columnName": "digit",
+            "fieldPath": "co2_data",
+            "columnName": "co2_data",
             "affinity": "INTEGER",
             "notNull": true
           }

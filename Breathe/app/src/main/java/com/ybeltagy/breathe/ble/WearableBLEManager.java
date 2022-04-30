@@ -66,22 +66,18 @@ public class WearableBLEManager extends BleManager {
 
                         wearableData.setPm_count(buf.getInt());
 
-                        // get the character (converts from UTF-8 in the message to Java's UTF-16)
-                        wearableData.setCharacter(
-                                (char) buf.get()
-                        );
+                        // get the VOC data
+                        wearableData.setVoc_data(buf.getInt());
 
-                        // get the digit (converts from UTF-8 in the message to Java's UTF-16)
-                        wearableData.setDigit(
-                                (char) buf.get()
-                        );
+                        // get the CO2 data
+                        wearableData.setCo2_data(buf.getInt());
 
                         Log.d(tag, "Wearable Data!");
                         Log.d(tag, "Temperature: " + wearableData.getTemperature());
                         Log.d(tag, "Humidity: " + wearableData.getHumidity());
                         Log.d(tag, "PM Count: " + wearableData.getPm_count());
-                        Log.d(tag, "Character: " + wearableData.getCharacter());
-                        Log.d(tag, "Digit: " + wearableData.getDigit());
+                        Log.d(tag, "VOC: " + wearableData.getVoc_data());
+                        Log.d(tag, "CO2: " + wearableData.getCo2_data());
                     }).await();
         }catch (Exception e){
             Log.d(tag, e.toString());

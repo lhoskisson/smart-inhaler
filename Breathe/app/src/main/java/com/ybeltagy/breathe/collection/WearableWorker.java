@@ -49,8 +49,8 @@ public class WearableWorker extends Worker {
         //called synchronously.
         BreatheRoomDatabase.getDatabase(curContext).breatheDao().
                 updateWearableData(timestamp, timestamp, wearableData.getTemperature(),
-                        wearableData.getHumidity(), wearableData.getPm_count(), wearableData.getCharacter(),
-                        wearableData.getDigit());
+                        wearableData.getHumidity(), wearableData.getPm_count(), wearableData.getVoc_data(),
+                        wearableData.getCo2_data());
 
         // Indicate whether the work finished successfully with the Result
         return Result.success();

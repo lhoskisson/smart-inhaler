@@ -29,9 +29,10 @@ public class WearableData {
 
     private float temperature; // The default null values should not make sense.
     private float humidity; //fixme: these variable names are asymmetric compared to weather data.
+
     private int   pm_count;
-    private char character; // they are also confusing.
-    private char digit;
+    private int   voc_data;
+    private int   co2_data;
 
     /**
      * Added this constructor for our iteration.
@@ -46,8 +47,8 @@ public class WearableData {
                 DataFinals.DEFAULT_FLOAT,
                 DataFinals.DEFAULT_FLOAT,
                 DataFinals.DEFAULT_INTEGER,
-                DataFinals.DEFAULT_CHAR,
-                DataFinals.DEFAULT_CHAR);
+                DataFinals.DEFAULT_INTEGER,
+                DataFinals.DEFAULT_INTEGER);
 
     }
 
@@ -56,8 +57,8 @@ public class WearableData {
                 DataFinals.DEFAULT_FLOAT,
                 DataFinals.DEFAULT_FLOAT,
                 DataFinals.DEFAULT_INTEGER,
-                DataFinals.DEFAULT_CHAR,
-                DataFinals.DEFAULT_CHAR);
+                DataFinals.DEFAULT_INTEGER,
+                DataFinals.DEFAULT_INTEGER);
     }
 
     @Ignore
@@ -65,15 +66,15 @@ public class WearableData {
                         float temperature,
                         float humidity,
                         int pm_count,
-                        char character,
-                        char digit){
+                        int voc_data,
+                        int co2_data){
 
         setWearableDataTimeStamp(wearableDataTimeStamp);
         setTemperature(temperature);
         setPm_count(pm_count);
         setHumidity(humidity);
-        setCharacter(character);
-        setDigit(digit);
+        setVoc_data(voc_data);
+        setCo2_data(co2_data);
     }
 
     /**
@@ -83,8 +84,8 @@ public class WearableData {
         return isTemperatureValid() &&
                 isHumidityValid() &&
                 isPm_countValid() &&
-                isCharacterValid() &&
-                isDigitValid();
+                isVoc_dataValid() &&
+                isCo2_dataValid();
     }
 
     public boolean isTemperatureValid(){
@@ -97,10 +98,10 @@ public class WearableData {
 
     public boolean isPm_countValid(){return pm_count != DataFinals.DEFAULT_INTEGER;}
 
-    public boolean isCharacterValid(){ return character != DataFinals.DEFAULT_CHAR; }
+    public boolean isVoc_dataValid(){ return voc_data != DataFinals.DEFAULT_CHAR; }
 
-    public boolean isDigitValid(){
-        return digit != DataFinals.DEFAULT_CHAR;
+    public boolean isCo2_dataValid(){
+        return co2_data != DataFinals.DEFAULT_CHAR;
     }
 
     @NonNull
@@ -128,29 +129,22 @@ public class WearableData {
         this.humidity = DataUtilities.nanGuard(humidity);
     }
 
-    public int getPm_count() {
-        return pm_count;
-    }
+    public int getPm_count() { return pm_count; }
 
     public void setPm_count(int pm_count) {
         if(pm_count < 0) pm_count = DataFinals.DEFAULT_INTEGER; // invalid data.
         this.pm_count = pm_count;
     }
 
+    public int getVoc_data() { return voc_data; }
 
-    public char getCharacter() {
-        return character;
+    public void setVoc_data(int voc_data) {
+        this.voc_data = voc_data;
     }
 
-    public void setCharacter(char character) {
-        this.character = character;
-    }
+    public int getCo2_data() { return co2_data; }
 
-    public char getDigit() {
-        return digit;
-    }
-
-    public void setDigit(char digit) {
-        this.digit = digit;
+    public void setCo2_data(int co2_data) {
+        this.co2_data = co2_data;
     }
 }

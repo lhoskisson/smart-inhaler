@@ -37,7 +37,7 @@ public class InhalerUsageEvent {
     @ColumnInfo(name = "Inhaler_Usage_Event_UTC_ISO_8601_date_time")
     private Instant inhalerUsageEventTimeStamp = DataFinals.DEFAULT_INSTANT;
     // Note: the java.time package and the Instant class seem like the correct way to store
-    // our dates for Java 8
+    // our dates for Java 8F
     // (https://medium.com/decisionbrain/dates-time-in-modern-java-4ed9d5848a3e)
 
     @Embedded

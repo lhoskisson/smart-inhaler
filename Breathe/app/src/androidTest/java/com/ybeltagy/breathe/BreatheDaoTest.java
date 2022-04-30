@@ -147,9 +147,9 @@ public class BreatheDaoTest {
                 testHumidity,
                 0);
         assertEquals(allEvents.get(0).getWearableData().getPm_count(), testPM);
-        assertEquals(allEvents.get(0).getWearableData().getCharacter(),
+        assertEquals(allEvents.get(0).getWearableData().getVoc_data(),
                 testChar1);
-        assertEquals(allEvents.get(0).getWearableData().getDigit(),
+        assertEquals(allEvents.get(0).getWearableData().getCo2_data(),
                 testChar2);
 
         // was the diary entry data preserved?

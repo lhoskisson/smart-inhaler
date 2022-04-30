@@ -121,8 +121,8 @@ public class IUEListAdapter
         public final TextView wearableLabel;
         public final TextView wearableTemperature;
         public final TextView wearableHumidity;
-        public final TextView wearableCharacter;
-        public final TextView wearableDigit;
+        public final TextView wearableVocData;
+        public final TextView wearableCo2Data;
         public final TextView wearablePm;
 
         // Weather Data
@@ -157,8 +157,8 @@ public class IUEListAdapter
             wearableLabel = itemView.findViewById(R.id.wearable_label_textview);
             wearableTemperature = itemView.findViewById(R.id.wearable_temp_textview);
             wearableHumidity = itemView.findViewById(R.id.wearable_humid_textview);
-            wearableCharacter = itemView.findViewById(R.id.wearable_char_textview);
-            wearableDigit = itemView.findViewById(R.id.wearable_digit_textview);
+            wearableVocData = itemView.findViewById(R.id.wearable_voc_textview);
+            wearableCo2Data = itemView.findViewById(R.id.wearable_co2_textview);
             wearablePm = itemView.findViewById(R.id.wearable_pm_textview);
 
             // WeatherData Textviews
@@ -195,8 +195,8 @@ public class IUEListAdapter
                 if(wearableData.isTemperatureValid()) wearableTemperature.setText(String.format(Locale.US, "T:\n%.0f°C", wearableData.getTemperature()));
                 if(wearableData.isHumidityValid()) wearableHumidity.setText(String.format(Locale.US,"H:\n%.0f %%", wearableData.getHumidity()));
                 if(wearableData.isPm_countValid()) wearablePm.setText(String.format(Locale.US,"PM:\n %d", wearableData.getPm_count()));
-                if(wearableData.isCharacterValid()) wearableCharacter.setText(String.format("C:\n%c", wearableData.getCharacter()));
-                if(wearableData.isDigitValid()) wearableDigit.setText(String.format("D:\n%c", wearableData.getDigit()));
+                if(wearableData.isVoc_dataValid()) wearableVocData.setText(String.format("VOC:\n%d", wearableData.getVoc_data()));
+                if(wearableData.isCo2_dataValid()) wearableCo2Data.setText(String.format("CO2:\n%d", wearableData.getCo2_data()));
 
 
             }
@@ -226,8 +226,8 @@ public class IUEListAdapter
             wearableLabel.setText("");
             wearableTemperature.setText("");
             wearableHumidity.setText("");
-            wearableCharacter.setText("");
-            wearableDigit.setText("");
+            wearableVocData.setText("");
+            wearableCo2Data.setText("");
             wearablePm.setText("");
 
             weatherLabel.setText("");

@@ -58,13 +58,13 @@
             android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/wearable_char_textview"
+            android:id="@+id/wearable_voc_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/wearable_digit_textview"
+            android:id="@+id/wearable_co2_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>

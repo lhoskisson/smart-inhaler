@@ -19,8 +19,8 @@ public class DataUtilities {
             "Wearable Temperature",
             "Wearable Humidity",
             "Wearable PM Count",
-            "Wearable Character",
-            "Wearable Digit",
+            "Wearable VOC Data",
+            "Wearable co2_data",
 
             "Weather Temperature",
             "Weather Humidity",
@@ -89,12 +89,12 @@ public class DataUtilities {
                 sb.append(wearableData.getPm_count());
             sb.append(comma);
 
-            if (wearableData.isCharacterValid())
-                sb.append(wearableData.getCharacter());
+            if (wearableData.isVoc_dataValid())
+                sb.append(wearableData.getVoc_data());
             sb.append(comma);
 
-            if (wearableData.isDigitValid())
-                sb.append(wearableData.getDigit());
+            if (wearableData.isCo2_dataValid())
+                sb.append(wearableData.getCo2_data());
             sb.append(comma);
 
         }

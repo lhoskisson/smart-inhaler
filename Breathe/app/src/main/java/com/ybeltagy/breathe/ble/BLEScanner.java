@@ -99,7 +99,7 @@ public class BLEScanner {
     }
 
     /**
-     * Starts a scan (using the provided callbac) for a device with the provided uuid.
+     * Starts a scan (using the provided callback) for a device with the provided uuid.
      * @param serviceUuid
      * @param callback
      * @return the scanner object

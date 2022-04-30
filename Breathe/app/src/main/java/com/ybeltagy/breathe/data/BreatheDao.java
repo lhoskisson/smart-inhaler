@@ -85,8 +85,8 @@ public interface BreatheDao {
      * @param wearableDataTimeStamp - when the wearableData was collected
      * @param temp
      * @param humid
-     * @param character
-     * @param digit
+     * @param voc_data
+     * @param co2_data
      * @return the number of records updated (should only be 1)
      */
     @Query("UPDATE InhalerUsageEvent_table " +
@@ -95,11 +95,11 @@ public interface BreatheDao {
             "temperature = :temp, " +
             "humidity = :humid," +
             "pm_count = :pm_count, " +
-            "character = :character, " +
-            "digit = :digit " +
+            "voc_data = :voc_data, " +
+            "co2_data = :co2_data " +
             "WHERE Inhaler_Usage_Event_UTC_ISO_8601_date_time = :inhalerUsageTimeStamp")
     int updateWearableData(Instant inhalerUsageTimeStamp, Instant wearableDataTimeStamp,
-                           float temp, float humid, int pm_count, char character, char digit);
+                           float temp, float humid, int pm_count, int voc_data, int co2_data);
 
     /**
      * Note: Use this one to update an existing inhalerUsageEvent with Weatherdata so the
