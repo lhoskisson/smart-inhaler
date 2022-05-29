@@ -30,7 +30,8 @@ public class WearableData {
     private float temperature; // The default null values should not make sense.
     private float humidity; //fixme: these variable names are asymmetric compared to weather data.
 
-    private int   pm_count;
+    private int pm_count_2_5;
+    private int pm_count_10;
     private int   voc_data;
     private int   co2_data;
 
@@ -48,6 +49,7 @@ public class WearableData {
                 DataFinals.DEFAULT_FLOAT,
                 DataFinals.DEFAULT_INTEGER,
                 DataFinals.DEFAULT_INTEGER,
+                DataFinals.DEFAULT_INTEGER,
                 DataFinals.DEFAULT_INTEGER);
 
     }
@@ -58,6 +60,7 @@ public class WearableData {
                 DataFinals.DEFAULT_FLOAT,
                 DataFinals.DEFAULT_INTEGER,
                 DataFinals.DEFAULT_INTEGER,
+                DataFinals.DEFAULT_INTEGER,
                 DataFinals.DEFAULT_INTEGER);
     }
 
@@ -65,13 +68,15 @@ public class WearableData {
     public WearableData(@NonNull Instant wearableDataTimeStamp,
                         float temperature,
                         float humidity,
-                        int pm_count,
+                        int pm_count_2_5,
+                        int pm_count_10,
                         int voc_data,
                         int co2_data){
 
         setWearableDataTimeStamp(wearableDataTimeStamp);
         setTemperature(temperature);
-        setPm_count(pm_count);
+        setPm_count_2_5(pm_count_2_5);
+        setPm_count_10(pm_count_10);
         setHumidity(humidity);
         setVoc_data(voc_data);
         setCo2_data(co2_data);
@@ -83,7 +88,8 @@ public class WearableData {
     public boolean isDataValid(){
         return isTemperatureValid() &&
                 isHumidityValid() &&
-                isPm_countValid() &&
+                isPm_count_2_5Valid() &&
+                isPm_count_10Valid() &&
                 isVoc_dataValid() &&
                 isCo2_dataValid();
     }
@@ -96,7 +102,9 @@ public class WearableData {
         return humidity != DataFinals.DEFAULT_FLOAT;
     }
 
-    public boolean isPm_countValid(){return pm_count != DataFinals.DEFAULT_INTEGER;}
+    public boolean isPm_count_2_5Valid(){return pm_count_2_5 != DataFinals.DEFAULT_INTEGER;}
+
+    public boolean isPm_count_10Valid(){return pm_count_10 != DataFinals.DEFAULT_INTEGER;}
 
     public boolean isVoc_dataValid(){ return voc_data != DataFinals.DEFAULT_INTEGER; }
 
@@ -129,11 +137,18 @@ public class WearableData {
         this.humidity = DataUtilities.nanGuard(humidity);
     }
 
-    public int getPm_count() { return pm_count; }
+    public int getPm_count_2_5() { return pm_count_2_5; }
 
-    public void setPm_count(int pm_count) {
-        if(pm_count < 0) pm_count = DataFinals.DEFAULT_INTEGER; // invalid data.
-        this.pm_count = pm_count;
+    public void setPm_count_2_5(int pm_count_2_5) {
+        if(pm_count_2_5 < 0) pm_count_2_5 = DataFinals.DEFAULT_INTEGER; // invalid data.
+        this.pm_count_2_5 = pm_count_2_5;
+    }
+
+    public int getPm_count_10() { return pm_count_10; }
+
+    public void setPm_count_10(int pm_count_10) {
+        if(pm_count_10 < 0) pm_count_10 = DataFinals.DEFAULT_INTEGER; // invalid data.
+        this.pm_count_10 = pm_count_10;
     }
 
     public int getVoc_data() { return voc_data; }

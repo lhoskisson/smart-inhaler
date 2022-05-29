@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "fa9daad1b7ee3a3b3d77d6eade6dd81f",
+    "identityHash": "a6297909304b9ec400279a185c0b8548",
     "entities": [
       {
         "tableName": "InhalerUsageEvent_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Inhaler_Usage_Event_UTC_ISO_8601_date_time` TEXT NOT NULL, `tag` INTEGER, `message` TEXT, `Wearable_Data_UTC_ISO_8601_date_time` TEXT, `temperature` REAL, `humidity` REAL, `pm_count` INTEGER, `voc_data` INTEGER, `co2_data` INTEGER, `weatherTemperature` REAL, `weatherHumidity` REAL, `weatherPrecipitationIntensity` REAL, `weatherTreeIndex` INTEGER, `weatherGrassIndex` INTEGER, `weatherEPAIndex` INTEGER, PRIMARY KEY(`Inhaler_Usage_Event_UTC_ISO_8601_date_time`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Inhaler_Usage_Event_UTC_ISO_8601_date_time` TEXT NOT NULL, `tag` INTEGER, `message` TEXT, `Wearable_Data_UTC_ISO_8601_date_time` TEXT, `temperature` REAL, `humidity` REAL, `pm_count_2_5` INTEGER, `pm_count_10` INTEGER, `voc_data` INTEGER, `co2_data` INTEGER, `weatherTemperature` REAL, `weatherHumidity` REAL, `weatherPrecipitationIntensity` REAL, `weatherTreeIndex` INTEGER, `weatherGrassIndex` INTEGER, `weatherEPAIndex` INTEGER, PRIMARY KEY(`Inhaler_Usage_Event_UTC_ISO_8601_date_time`))",
         "fields": [
           {
             "fieldPath": "inhalerUsageEventTimeStamp",
@@ -45,8 +45,14 @@
             "notNull": false
           },
           {
-            "fieldPath": "wearableData.pm_count",
-            "columnName": "pm_count",
+            "fieldPath": "wearableData.pm_count_2_5",
+            "columnName": "pm_count_2_5",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "wearableData.pm_count_10",
+            "columnName": "pm_count_10",
             "affinity": "INTEGER",
             "notNull": false
           },
@@ -110,7 +116,7 @@
       },
       {
         "tableName": "WearableData_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Wearable_Data_UTC_ISO_8601_date_time` TEXT NOT NULL, `temperature` REAL NOT NULL, `humidity` REAL NOT NULL, `pm_count` INTEGER NOT NULL, `voc_data` INTEGER NOT NULL, `co2_data` INTEGER NOT NULL, PRIMARY KEY(`Wearable_Data_UTC_ISO_8601_date_time`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`Wearable_Data_UTC_ISO_8601_date_time` TEXT NOT NULL, `temperature` REAL NOT NULL, `humidity` REAL NOT NULL, `pm_count_2_5` INTEGER NOT NULL, `pm_count_10` INTEGER NOT NULL, `voc_data` INTEGER NOT NULL, `co2_data` INTEGER NOT NULL, PRIMARY KEY(`Wearable_Data_UTC_ISO_8601_date_time`))",
         "fields": [
           {
             "fieldPath": "wearableDataTimeStamp",
@@ -131,8 +137,14 @@
             "notNull": true
           },
           {
-            "fieldPath": "pm_count",
-            "columnName": "pm_count",
+            "fieldPath": "pm_count_2_5",
+            "columnName": "pm_count_2_5",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pm_count_10",
+            "columnName": "pm_count_10",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -162,7 +174,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fa9daad1b7ee3a3b3d77d6eade6dd81f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a6297909304b9ec400279a185c0b8548')"
     ]
   }
 }

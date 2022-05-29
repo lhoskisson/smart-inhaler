@@ -64,7 +64,12 @@ public class WearableBLEManager extends BleManager {
                         // get the humidity in little endian
                         wearableData.setHumidity(buf.getFloat());
 
-                        wearableData.setPm_count(buf.getInt());
+                        //wearableData.setPm_count(buf.getInt());
+                        //get pm 2.5
+                        wearableData.setPm_count_2_5(buf.getInt());
+
+                        //get pm 10
+                        wearableData.setPm_count_10(buf.getInt());
 
                         // get the VOC data
                         wearableData.setVoc_data(buf.getInt());
@@ -75,7 +80,8 @@ public class WearableBLEManager extends BleManager {
                         Log.d(tag, "Wearable Data!");
                         Log.d(tag, "Temperature: " + wearableData.getTemperature());
                         Log.d(tag, "Humidity: " + wearableData.getHumidity());
-                        Log.d(tag, "PM Count: " + wearableData.getPm_count());
+                        Log.d(tag, "PM 2.5 Count: " + wearableData.getPm_count_2_5());
+                        Log.d(tag, "PM 10 Count: " + wearableData.getPm_count_10());
                         Log.d(tag, "VOC: " + wearableData.getVoc_data());
                         Log.d(tag, "CO2: " + wearableData.getCo2_data());
                     }).await();

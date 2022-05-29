@@ -98,7 +98,8 @@ public class BreatheRepository {
                         wearableData.getWearableDataTimeStamp(),
                         wearableData.getTemperature(),
                         wearableData.getHumidity(),
-                        wearableData.getPm_count(),
+                        wearableData.getPm_count_2_5(),
+                        wearableData.getPm_count_10(),
                         wearableData.getVoc_data(),
                         wearableData.getCo2_data()));
     }

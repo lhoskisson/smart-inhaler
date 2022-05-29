@@ -85,8 +85,12 @@ public class DataUtilities {
                 sb.append(wearableData.getHumidity());
             sb.append(comma);
 
-            if (wearableData.isPm_countValid())
-                sb.append(wearableData.getPm_count());
+            if (wearableData.isPm_count_2_5Valid())
+                sb.append(wearableData.getPm_count_2_5());
+            sb.append(comma);
+
+            if (wearableData.isPm_count_10Valid())
+                sb.append(wearableData.getPm_count_10());
             sb.append(comma);
 
             if (wearableData.isVoc_dataValid())
