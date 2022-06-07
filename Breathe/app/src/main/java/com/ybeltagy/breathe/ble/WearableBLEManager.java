@@ -51,9 +51,17 @@ public class WearableBLEManager extends BleManager {
             readCharacteristic(wearableDataCharacteristic)
                     .with( (device, data) -> { // Data received Callback
 
-                        //TODO: Add support for the PM2.5 Sensor data.
+                        if(data.getValue() == null)
+                        {
+                            Log.d(tag, "null value");
+                            return;
+                        }
 
-                        if(data == null || data.getValue() == null) return;
+                        if(data.size() != 24)
+                        {
+                            Log.d(tag, "wrong size");
+                            return;
+                        }
 
                         //Parse the input in Little_endian because the esp32/stm32 are little endian
                         ByteBuffer buf = ByteBuffer.wrap(data.getValue()).order(ByteOrder.LITTLE_ENDIAN);
@@ -64,18 +72,17 @@ public class WearableBLEManager extends BleManager {
                         // get the humidity in little endian
                         wearableData.setHumidity(buf.getFloat());
 
-                        //wearableData.setPm_count(buf.getInt());
-                        //get pm 2.5
-                        wearableData.setPm_count_2_5(buf.getInt());
+                        //get pm 2.5 - 2 Bytes
+                        wearableData.setPm_count_2_5(buf.getShort());
 
-                        //get pm 10
-                        wearableData.setPm_count_10(buf.getInt());
+                        //get pm 10 - 2 Bytes
+                        wearableData.setPm_count_10(buf.getShort());
 
-                        // get the VOC data
-                        wearableData.setVoc_data(buf.getInt());
+                        // get the VOC data - 2 Bytes
+                        wearableData.setVoc_data(buf.getShort());
 
-                        // get the CO2 data
-                        wearableData.setCo2_data(buf.getInt());
+                        // get the CO2 data - 2 Bytes
+                        wearableData.setCo2_data(buf.getShort());
 
                         Log.d(tag, "Wearable Data!");
                         Log.d(tag, "Temperature: " + wearableData.getTemperature());
@@ -115,9 +122,9 @@ public class WearableBLEManager extends BleManager {
             if (wearableDataCharacteristic == null)
                 return false;
 
-            // Ensure wearableData characteristic has a read property.
-            return (wearableDataCharacteristic.getProperties() &
-                    BluetoothGattCharacteristic.PROPERTY_READ) != 0;
+            // Ensure wearableData characteristic has a read and indication property.
+            return (wearableDataCharacteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_READ) != 0 &&
+                    (wearableDataCharacteristic.getProperties() & BluetoothGattCharacteristic.PROPERTY_INDICATE) != 0;
         }
 
         /**
@@ -144,12 +151,61 @@ public class WearableBLEManager extends BleManager {
                     .done(callback -> Log.d(tag, "Target initialized - callback" + callback.toString()))
                     .enqueue();
 
+            setIndicationCallback(wearableDataCharacteristic).with(
+                    (device, data) ->
+                    {
+                        Log.d(tag, "Recieved Wearable Data");
+
+                        if(data.getValue() == null)
+                        {
+                            Log.d(tag, "null value");
+                            return;
+                        }
+
+                        if(data.size() != 16)
+                        {
+                            Log.d(tag, "wrong size");
+                            return;
+                        }
+
+                        WearableData wearableData = new WearableData();
+                        ByteBuffer buf = ByteBuffer.wrap(data.getValue()).order(ByteOrder.LITTLE_ENDIAN);
+
+                        // get the temperature in little endian - 4 Bytes
+                        wearableData.setTemperature(buf.getFloat());
+
+                        // get the humidity in little endian - 4 Bytes
+                        wearableData.setHumidity(buf.getFloat());
+
+                        //get pm 2.5 - 2 Bytes
+                        wearableData.setPm_count_2_5(buf.getShort());
+
+                        //get pm 10 - 2 Bytes
+                        wearableData.setPm_count_10(buf.getShort());
+
+                        // get the VOC data - 2 Bytes
+                        wearableData.setVoc_data(buf.getShort());
+
+                        // get the CO2 data - 2 Bytes
+                        wearableData.setCo2_data(buf.getShort());
+
+                        Log.d(tag, "Wearable Data!");
+                        Log.d(tag, "Temperature: " + wearableData.getTemperature());
+                        Log.d(tag, "Humidity: " + wearableData.getHumidity());
+                        Log.d(tag, "PM 2.5 Count: " + wearableData.getPm_count_2_5());
+                        Log.d(tag, "PM 10 Count: " + wearableData.getPm_count_10());
+                        Log.d(tag, "VOC: " + wearableData.getVoc_data());
+                        Log.d(tag, "CO2: " + wearableData.getCo2_data());
+                    });
+
+
             readCharacteristic(wearableDataCharacteristic).enqueue();
             // Make a read request to guarantee bonding for the stm32 wearable
 
             // TODO: to meet a stretch goal, you may need to enable Ble notificaionts/indications here.
             //  You need to enable notifications and set required
             //  MTU or write some initial data. Do it here.
+            enableIndications(wearableDataCharacteristic).enqueue();
         }
 
         /**
